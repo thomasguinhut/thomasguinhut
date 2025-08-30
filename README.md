@@ -1,1 +1,1 @@
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thomasguinhut&layout=compact&hide_title=true&langs_count=6&hide=html,css&card_width=1000)](https://github.com/thomasguinhut)
+![Most Used Languages](languages.svg)
