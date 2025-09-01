@@ -1,30 +1,29 @@
 name: Update GitHub Stats SVG
-
 on:
   schedule:
-    - cron: '0 * * * *'  
-  workflow_dispatch:        
-
+    - cron: '0 * * * *'
+  workflow_dispatch:
 permissions:
-  contents: write           
-
+  contents: write
 jobs:
   update-stats:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0      
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
+
+      - name: Clear output directory (to avoid cache issues)
+        run: rm -rf output/
 
       - name: Generate GitHub stats SVG
         env:
@@ -36,7 +35,7 @@ jobs:
           node src/generators/stats_commits.js
           node src/generators/stats_general.js
           node src/generators/stats_langs.js
-          node src/generators/stats_visitors.js 
+          node src/generators/stats_visitors.js
 
       - name: Setup Git identity
         run: |
