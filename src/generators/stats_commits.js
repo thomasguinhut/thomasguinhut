@@ -198,8 +198,7 @@ async function generateSVG() {
           )}`
         : "N/A";
 
-    const timeZone = colors.meta?.timeZone || "Europe/Paris";
-    let lastUpdate = "";
+    const timeZone = "Europe/Paris";
 
     if (timeZone !== "none") {
       lastUpdate = new Date()
