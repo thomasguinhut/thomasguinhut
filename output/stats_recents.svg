@@ -207,22 +207,13 @@
           <tr class="repo-row" style="height: 20px; animation-delay: 1.4s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
-                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">stage_anthony</span>
-              </div>
-            </td>
-            <td class="updated-at" style="width: 130px; text-align: center;">Sep 1, 2025</td>
-            <td class="language" style="width: 120px; text-align: center;">R</td>
-          </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 1.775s;">
-            <td class="repo-name" style="width: 186px; text-align: center;">
-              <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">thomasguinhut</span>
               </div>
             </td>
             <td class="updated-at" style="width: 130px; text-align: center;">Sep 1, 2025</td>
             <td class="language" style="width: 120px; text-align: center;">Handlebars</td>
           </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.15s;">
+          <tr class="repo-row" style="height: 20px; animation-delay: 1.775s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">edt_ensai</span>
@@ -231,7 +222,7 @@
             <td class="updated-at" style="width: 130px; text-align: center;">Aug 30, 2025</td>
             <td class="language" style="width: 120px; text-align: center;">Python</td>
           </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.525s;">
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.15s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">carnet_partitions</span>
@@ -240,7 +231,7 @@
             <td class="updated-at" style="width: 130px; text-align: center;">Aug 29, 2025</td>
             <td class="language" style="width: 120px; text-align: center;">Python</td>
           </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.9s;">
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.525s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">stage_2a_enl</span>
@@ -248,6 +239,15 @@
             </td>
             <td class="updated-at" style="width: 130px; text-align: center;">Aug 26, 2025</td>
             <td class="language" style="width: 120px; text-align: center;">R</td>
+          </tr>
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.9s;">
+            <td class="repo-name" style="width: 186px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center;">
+                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">statagora</span>
+              </div>
+            </td>
+            <td class="updated-at" style="width: 130px; text-align: center;">Aug 4, 2025</td>
+            <td class="language" style="width: 120px; text-align: center;">Python</td>
           </tr>
         </tbody>
       </table>
