@@ -199,14 +199,17 @@ async function generateSVG() {
         : "N/A";
 
     const timeZone = "Europe/Paris"; 
-    const lastUpdate = new Date().toLocaleString("fr-FR", {
-      timeZone: timeZone,
+    const lastUpdate = new Date()
+    .toLocaleString("fr-FR", {
+      timeZone,
       day: "2-digit",
-      month: "long",
+      month: "short",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    });
+      hour12: false,
+    })
+    .replace(",", "");
 
     const templateData = {
       ...colors.light,
