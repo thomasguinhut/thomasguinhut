@@ -150,9 +150,9 @@
 
   <!-- Section 1: Total Contributions -->
   <g transform="translate(83, 80)">
-    <text class="stat tc" y="15" text-anchor="middle">733</text>
+    <text class="stat tc" y="15" text-anchor="middle">736</text>
     <text class="label tc" y="50" text-anchor="middle">Total Contributions</text>
-    <text class="date tc" y="73" text-anchor="middle">Nov 22, 2023 - Sep 1, 2025</text>
+    <text class="date tc" y="73" text-anchor="middle">22 novembre 2023 - 1 septembre 2025</text>
   </g>
 
   <!-- Section 2: Current Streak -->
@@ -162,7 +162,7 @@
     </g>
     <text class="stat streak" y="6" text-anchor="middle">1</text>
     <text class="label streak" y="65" text-anchor="middle">Current Streak</text>
-    <text class="date streak" y="88" text-anchor="middle">Sep 1, 2025 - Sep 1, 2025</text>
+    <text class="date streak" y="88" text-anchor="middle">1 septembre 2025 - 1 septembre 2025</text>
     <!-- Fire icon -->
     <g transform="translate(0, -55)">
       <path d="M -12 -0.5 L 15 -0.5 L 15 23.5 L -12 23.5 L -12 -0.5 Z" fill="none"/>
@@ -183,11 +183,8 @@
   <g transform="translate(377.5, 80)">
     <text class="stat long" y="15" text-anchor="middle">10</text>
     <text class="label long" y="50" text-anchor="middle">Longest Streak</text>
-    <text class="date long" y="73" text-anchor="middle">Apr 29, 2024 - May 8, 2024</text>
+    <text class="date long" y="73" text-anchor="middle">29 avril 2024 - 8 mai 2024</text>
   </g>
 
   <!-- Footer -->
-  <g transform="translate(230, 188)">
-    <text class="footer" text-anchor="middle">Updated last at: Sep 01 2025, 16:25</text>
-  </g>
 </svg>
