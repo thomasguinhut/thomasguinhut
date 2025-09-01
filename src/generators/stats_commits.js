@@ -8,9 +8,7 @@ const token = process.env.ACCESS_TOKEN;
 const GRAPHQL_API = "https://api.github.com/graphql";
 
 if (!token) {
-  console.error(
-    "Error: ACCESS_TOKEN is not defined in the environment variables."
-  );
+  console.error("Error: ACCESS_TOKEN is not defined in the environment variables.");
   process.exit(1);
 }
 
@@ -23,13 +21,11 @@ async function fetchFromGitHub(query, variables = {}) {
     },
     body: JSON.stringify({ query, variables }),
   });
-
   if (!response.ok) {
     const errorText = await response.text();
     console.error("GitHub API Error:", errorText);
     throw new Error("Failed to fetch data from GitHub API.");
   }
-
   const data = await response.json();
   if (data.errors) {
     console.error("GitHub API Error:", JSON.stringify(data.errors, null, 2));
@@ -93,10 +89,7 @@ async function fetchAllContributions(userCreationDate, now) {
         now.getTime()
       )
     );
-    const contributions = await fetchContributionsForPeriod(
-      currentStart,
-      currentEnd
-    );
+    const contributions = await fetchContributionsForPeriod(currentStart, currentEnd);
     totalContributionsSum += contributions.totalContributions;
     contributions.weeks.forEach((week) => {
       week.contributionDays.forEach((day) => {
@@ -108,17 +101,24 @@ async function fetchAllContributions(userCreationDate, now) {
   return { allContributionDays, totalContributionsSum };
 }
 
+function formatDate(date, locale = "fr") {
+  if (!date) return "N/A";
+  const options = {
+    year: "numeric",
+    month: locale === "fr" ? "long" : "short",
+    day: "numeric",
+  };
+  return new Date(date).toLocaleDateString(locale, options);
+}
+
 function calculateStreaksAndTotals(allContributionDays) {
   allContributionDays.sort((a, b) => new Date(a.date) - new Date(b.date));
-
   let longestStreak = 0;
   let longestStreakStart = null;
   let longestStreakEnd = null;
-
   let currentStreak = 0;
   let currentStreakStart = null;
   let lastContributionDate = null;
-
   const today = new Date().toISOString().split("T")[0];
 
   for (const { date, contributionCount } of allContributionDays) {
@@ -146,9 +146,7 @@ function calculateStreaksAndTotals(allContributionDays) {
       lastContributionDate = date;
     }
   }
-
-  let isCurrentStreakActive = lastContributionDate === today;
-
+  const isCurrentStreakActive = lastContributionDate === today;
   return {
     currentStreak: isCurrentStreakActive ? currentStreak : 0,
     currentStreakStart: isCurrentStreakActive ? currentStreakStart : null,
@@ -158,62 +156,36 @@ function calculateStreaksAndTotals(allContributionDays) {
   };
 }
 
-function formatDate(date) {
-  if (!date) return "N/A";
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  return new Date(date).toLocaleDateString("en", options);
-}
-
 async function generateSVG() {
   try {
     const userCreationDate = await fetchUserCreationDate();
     const now = new Date();
+    const { allContributionDays, totalContributionsSum } = await fetchAllContributions(userCreationDate, now);
 
-    const { allContributionDays, totalContributionsSum } =
-      await fetchAllContributions(userCreationDate, now);
-
-    const {
-      currentStreak,
-      longestStreak,
-      currentStreakStart,
-      longestStreakStart,
-      longestStreakEnd,
-    } = calculateStreaksAndTotals(allContributionDays);
+    const { currentStreak, longestStreak, currentStreakStart, longestStreakStart, longestStreakEnd } = calculateStreaksAndTotals(allContributionDays);
 
     const mostRecentCommitDate = now;
-
     const commitDateRange = userCreationDate
-      ? `${formatDate(userCreationDate)} - ${formatDate(mostRecentCommitDate)}`
+      ? `${formatDate(userCreationDate, "fr")} - ${formatDate(mostRecentCommitDate, "fr")}`
       : "N/A";
 
-    const longestStreakDates =
-      longestStreak > 0 && longestStreakStart && longestStreakEnd
-        ? `${formatDate(longestStreakStart)} - ${formatDate(longestStreakEnd)}`
-        : "N/A";
+    const longestStreakDates = longestStreak > 0 && longestStreakStart && longestStreakEnd
+      ? `${formatDate(longestStreakStart, "fr")} - ${formatDate(longestStreakEnd, "fr")}`
+      : "N/A";
 
-    const currentStreakDateRange =
-      currentStreak > 0 && currentStreakStart
-        ? `${formatDate(currentStreakStart)} - ${formatDate(
-            mostRecentCommitDate
-          )}`
-        : "N/A";
+    const currentStreakDateRange = currentStreak > 0 && currentStreakStart
+      ? `${formatDate(currentStreakStart, "fr")} - ${formatDate(mostRecentCommitDate, "fr")}`
+      : "N/A";
 
-    const timeZone = colors.meta?.timeZone || "Europe/Moscow";
-    let lastUpdate = "";
-
-    if (timeZone !== "none") {
-      lastUpdate = new Date()
-        .toLocaleString("en", {
-          timeZone: timeZone,
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        })
-        .replace(",", "");
-    }
+    const timeZone = "Europe/Paris";
+    const lastUpdateFr = new Date().toLocaleString("fr-FR", {
+      timeZone: timeZone,
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
     const templateData = {
       ...colors.light,
@@ -226,24 +198,18 @@ async function generateSVG() {
       currentStreakDateRange,
       longestStreak,
       longestStreakDateRange: longestStreakDates,
-      lastUpdate,
+      lastUpdateFr,
     };
 
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
-    const templatePath = path.resolve(
-      __dirname,
-      "..",
-      "templates",
-      "template_commits.hbs"
-    );
-    const svgContent = Handlebars.compile(
-      fs.readFileSync(templatePath, "utf8")
-    )(templateData);
+    const templatePath = path.resolve(__dirname, "..", "templates", "template_commits.hbs");
+    const svgContent = Handlebars.compile(fs.readFileSync(templatePath, "utf8"))(templateData);
 
     const svgDir = path.resolve(__dirname, "..", "..", "output");
     if (!fs.existsSync(svgDir)) {
       fs.mkdirSync(svgDir, { recursive: true });
     }
+
     const outputPath = path.join(svgDir, "stats_commits.svg");
     fs.writeFileSync(outputPath, svgContent);
     console.log(`SVG file created: ${outputPath}`);
