@@ -198,7 +198,7 @@ async function generateSVG() {
           )}`
         : "N/A";
 
-    const timeZone = colors.meta?.timeZone || "Europe/Moscow";
+    const timeZone = colors.meta?.timeZone || "Europe/Paris";
     let lastUpdate = "";
 
     if (timeZone !== "none") {
