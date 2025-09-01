@@ -50,11 +50,15 @@ async function getRepos(username, queries) {
     if (response.length === 0) {
       hasMore = false;
     } else {
-      repos.push(...response);
+      // Filtrer les dépôts privés et exclus
+      const filteredRepos = response.filter(
+        repo => !repo.private && !excludedRepos.includes(repo.name.toLowerCase())
+      );
+      repos.push(...filteredRepos);
       page++;
     }
   }
-  return repos.filter(repo => !excludedRepos.includes(repo.name.toLowerCase())).slice(0, 5);
+  return repos.slice(0, 5);
 }
 
 async function getRepoInfos(repos, queries) {
