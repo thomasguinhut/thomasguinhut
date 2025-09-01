@@ -198,21 +198,15 @@ async function generateSVG() {
           )}`
         : "N/A";
 
-    const timeZone = "Europe/Paris";
-
-    if (timeZone !== "none") {
-      lastUpdate = new Date()
-        .toLocaleString("en", {
-          timeZone: timeZone,
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        })
-        .replace(",", "");
-    }
+    const timeZone = "Europe/Paris"; 
+    const lastUpdate = new Date().toLocaleString("fr-FR", {
+      timeZone: timeZone,
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
     const templateData = {
       ...colors.light,
