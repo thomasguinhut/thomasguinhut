@@ -141,7 +141,7 @@ function calculateStreaksAndTotals(allContributionDays) {
       lastContributionDate = date;
     }
   }
-  let isCurrentStreakActive = lastContributionDate === today;
+  const isCurrentStreakActive = lastContributionDate === today;
   return {
     currentStreak: isCurrentStreakActive ? currentStreak : 0,
     currentStreakStart: isCurrentStreakActive ? currentStreakStart : null,
@@ -160,7 +160,6 @@ async function generateSVG() {
       currentStreak,
       longestStreak,
       currentStreakStart,
-      longestStreakStart,
       longestStreakEnd,
     } = calculateStreaksAndTotals(allContributionDays);
     const mostRecentCommitDate = now;
@@ -176,16 +175,17 @@ async function generateSVG() {
         ? `${formatDate(currentStreakStart)} - ${formatDate(mostRecentCommitDate)}`
         : "N/A";
 
-    // Modification uniquement ici pour le footer :
+    // Modification uniquement pour le footer :
     const timeZone = "Europe/Paris";
-    const lastUpdateFr = new Date().toLocaleString("fr-FR", {
+    const lastUpdate = new Date().toLocaleString("en-GB", {
       timeZone: timeZone,
       day: "2-digit",
-      month: "long",
+      month: "short",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    });
+      hour12: false,
+    }).replace(",", "");
 
     const templateData = {
       ...colors.light,
@@ -198,7 +198,7 @@ async function generateSVG() {
       currentStreakDateRange,
       longestStreak,
       longestStreakDateRange: longestStreakDates,
-      lastUpdateFr, // Ajout de lastUpdateFr pour le footer
+      lastUpdate: `${lastUpdate} (french time)`,
     };
 
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
