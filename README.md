@@ -26,6 +26,6 @@
 
 <p align="center">
   <a href="https://go-skill-icons.vercel.app/">
-    <img src="https://go-skill-icons.vercel.app/api/icons?i=git,github,gitlab,python,streamlit,r,dbeaver,postgresql,java,premiere,aftereffects,photoshop,lightroom,indesign,canva,aws,mistral,wordpress,latex" alt="Technologies Used" />
+    <img src="https://go-skill-icons.vercel.app/api/icons?i=git,github,gitlab,vscode,python,streamlit,r,postgresql,dbeaver,java,premiere,aftereffects,photoshop,lightroom,indesign,canva,aws,mistral,wordpress,latex" alt="Technologies Used" />
   </a>
 </p>
