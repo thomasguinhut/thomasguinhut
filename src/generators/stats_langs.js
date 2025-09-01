@@ -110,17 +110,17 @@ async function fetchTopLanguages() {
   );
 
   const filteredLanguages = filteredEntries
-    .map(([name, lang]) => ({
-      lang: name,
-      percent: filteredTotal > 0 ? (lang.size / filteredTotal) * 100 : 0,
-      percentFixed:
-        filteredTotal > 0
-          ? ((lang.size / filteredTotal) * 100).toFixed(2)
-          : "0.00",
-      color: lang.color,
-    }))
-    .sort((a, b) => b.percent - a.percent)
-    .slice(0, 11);
+  .map(([name, lang]) => ({
+    lang: name,
+    percent: filteredTotal > 0 ? (lang.size / filteredTotal) * 100 : 0,
+    percentFixed:
+      filteredTotal > 0
+        ? ((lang.size / filteredTotal) * 100).toFixed(2)
+        : "0.00",
+    color: name === "Python" ? "#f6c53a" : lang.color,
+  }))
+  .sort((a, b) => b.percent - a.percent)
+  .slice(0, 11);
 
   const N = filteredLanguages.length;
   const startDelay = 0.85;
