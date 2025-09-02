@@ -50,7 +50,6 @@ async function getRepos(username, queries) {
     if (response.length === 0) {
       hasMore = false;
     } else {
-      // Filtrer les dépôts privés et exclus
       const filteredRepos = response.filter(
         repo => !repo.private && !excludedRepos.includes(repo.name.toLowerCase())
       );
@@ -58,6 +57,7 @@ async function getRepos(username, queries) {
       page++;
     }
   }
+  console.log("Repos avant slice:", repos.map(r => ({ name: r.name, pushed_at: r.pushed_at }))); // Log pour vérifier l'ordre
   return repos.slice(0, 5);
 }
 
@@ -67,20 +67,22 @@ async function getRepoInfos(repos, queries) {
     try {
       const repoData = await queries.queryRest(`/repos/${username}/${repo.name}`);
       const updatedAt = new Date(repoData.updated_at);
-      const formattedDate = updatedAt.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
       repoInfos.push({
         name: repo.name,
-        updatedAt: formattedDate,
+        updatedAt: updatedAt.toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        }),
         language: repoData.language || 'Unknown',
+        rawDate: updatedAt, // Ajoute la date brute pour le tri
       });
     } catch (error) {
       console.error(`Error fetching info for repo ${repo.name}:`, error);
     }
   }
+  // Trie par date décroissante (au cas où)
+  repoInfos.sort((a, b) => b.rawDate - a.rawDate);
   return repoInfos;
 }
 
