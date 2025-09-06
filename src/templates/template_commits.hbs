@@ -138,7 +138,9 @@
     </g>
     <text class="stat streak" y="6" text-anchor="middle">{{currentStreak}}</text>
     <text class="label streak" y="65" text-anchor="middle">Current Streak</text>
-    <text class="date streak" y="88" text-anchor="middle">{{currentStreakDateRange}}</text>
+    {{#if currentStreakDateRange}}
+      <text class="date streak" y="88" text-anchor="middle">{{currentStreakDateRange}}</text>
+    {{/if}}
     <!-- Fire icon -->
     <g transform="translate(0, -55)">
       <path d="M -12 -0.5 L 15 -0.5 L 15 23.5 L -12 23.5 L -12 -0.5 Z" fill="none"/>
