@@ -165,6 +165,23 @@ function formatDate(date) {
   return new Date(date).toLocaleDateString("en", options);
 }
 
+// Fonction pour formater la date de mise à jour de façon plus robuste
+function formatLastUpdate() {
+  const now = new Date();
+  // Utiliser UTC puis ajuster pour Paris (+2h en été, +1h en hiver)
+  const parisTime = new Date(now.getTime() + (2 * 60 * 60 * 1000)); // Ajustement pour UTC+2
+  
+  const day = parisTime.getUTCDate().toString().padStart(2, '0');
+  const monthNames = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 
+                      'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
+  const month = monthNames[parisTime.getUTCMonth()];
+  const year = parisTime.getUTCFullYear();
+  const hours = parisTime.getUTCHours().toString().padStart(2, '0');
+  const minutes = parisTime.getUTCMinutes().toString().padStart(2, '0');
+  
+  return `${day} ${month} ${year} ${hours}:${minutes}`;
+}
+
 async function generateSVG() {
   try {
     const userCreationDate = await fetchUserCreationDate();
@@ -188,23 +205,13 @@ async function generateSVG() {
         ? `${formatDate(longestStreakStart)} - ${formatDate(longestStreakEnd)}`
         : "N/A";
 
+    // Correction pour currentStreakDateRange - toujours retourner quelque chose ou null
     const currentStreakDateRange =
       currentStreak > 0 && currentStreakStart
         ? `${formatDate(currentStreakStart)} - ${formatDate(mostRecentCommitDate)}`
-        : "";
+        : null; // null au lieu de chaîne vide
 
-    const timeZone = "Europe/Paris";
-    const lastUpdate = new Date()
-      .toLocaleString("fr-FR", {
-        timeZone,
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      })
-      .replace(",", "");
+    const lastUpdate = formatLastUpdate();
 
     const templateData = {
       ...colors.light,
@@ -214,7 +221,7 @@ async function generateSVG() {
       totalContributions: totalContributionsSum,
       commitDateRange,
       currentStreak,
-      currentStreakDateRange,
+      currentStreakDateRange, // Maintenant null quand pas de streak
       longestStreak,
       longestStreakDateRange: longestStreakDates,
       lastUpdate,
@@ -228,7 +235,7 @@ async function generateSVG() {
       fs.mkdirSync(svgDir, { recursive: true });
     }
     const outputPath = path.join(svgDir, "stats_commits.svg");
-    fs.writeFileSync(outputPath, svgContent);
+    fs.writeFileSync(svgContent, outputPath);
     console.log(`SVG file created: ${outputPath}`);
   } catch (error) {
     console.error("Error generating SVG:", error);
