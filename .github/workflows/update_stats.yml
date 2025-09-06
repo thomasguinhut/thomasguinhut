@@ -45,6 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
           EXCLUDED_REPOS: ${{ secrets.EXCLUDED_REPOS }}
+          GITHUB_USERNAME: "thomasguinhut"  # Ajoute cette variable
         run: |
           mkdir -p output
           echo "Generating stats_commits.svg..."
@@ -53,8 +54,8 @@ jobs:
           node src/generators/stats_general.js
           echo "Generating stats_langs.svg..."
           node src/generators/stats_langs.js
-          echo "Generating stats_recents.svg..."
-          node src/generators/stats_recents.js
+          echo "Generating stats_visitors.svg..."
+          node src/generators/stats_visitors.js
           ls -la output/
 
       - name: Force update SVG timestamps
