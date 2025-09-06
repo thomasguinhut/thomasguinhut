@@ -191,9 +191,7 @@ async function generateSVG() {
     const currentStreakDateRange =
       currentStreak > 0 && currentStreakStart
         ? `${formatDate(currentStreakStart)} - ${formatDate(mostRecentCommitDate)}`
-        : longestStreak > 0 && longestStreakStart && longestStreakEnd
-          ? `${formatDate(longestStreakStart)} - ${formatDate(longestStreakEnd)}`
-          : "N/A";
+        : "";
 
     const timeZone = "Europe/Paris";
     const lastUpdate = new Date()
