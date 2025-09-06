@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import Handlebars from "handlebars";
 import colors from "../../themes/colors_commits.js";
+import fetch from "node-fetch";
 
-const username = process.env.GITHUB_ACTOR;
+const username = process.env.GITHUB_USERNAME || "thomasguinhut";
 const token = process.env.ACCESS_TOKEN;
 const GRAPHQL_API = "https://api.github.com/graphql";
 
@@ -167,50 +168,7 @@ function formatDate(date) {
 
 // Fonction pour formater la date de mise à jour - TOUJOURS actuelle
 function formatLastUpdate() {
-  const now = new Date();
-  console.log('Debug - Raw UTC time:', now.toISOString());
-  
-  // Calculer l'offset pour Paris (UTC+1 en hiver, UTC+2 en été)
-  // Septembre = été donc UTC+2
-  const utcHours = now.getUTCHours();
-  const utcMinutes = now.getUTCMinutes();
-  const utcDate = now.getUTCDate();
-  const utcMonth = now.getUTCMonth();
-  const utcYear = now.getUTCFullYear();
-  
-  // Ajouter 2 heures pour Paris en septembre
-  let parisHours = utcHours + 2;
-  let parisDate = utcDate;
-  let parisMonth = utcMonth;
-  let parisYear = utcYear;
-  
-  // Gérer le passage au jour suivant
-  if (parisHours >= 24) {
-    parisHours -= 24;
-    parisDate += 1;
-    // Gérer le passage au mois suivant (simplifié)
-    if (parisDate > 30) { // approximation
-      parisDate = 1;
-      parisMonth += 1;
-      if (parisMonth > 11) {
-        parisMonth = 0;
-        parisYear += 1;
-      }
-    }
-  }
-  
-  const day = parisDate.toString().padStart(2, '0');
-  const monthNames = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 
-                      'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
-  const month = monthNames[parisMonth];
-  const year = parisYear;
-  const hours = parisHours.toString().padStart(2, '0');
-  const minutes = utcMinutes.toString().padStart(2, '0');
-  
-  const formatted = `${day} ${month} ${year} ${hours}:${minutes}`;
-  console.log('Debug - Formatted time:', formatted);
-  
-  return formatted;
+  return new Date().toISOString();
 }
 
 async function generateSVG() {
