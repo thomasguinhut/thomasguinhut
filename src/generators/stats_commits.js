@@ -165,25 +165,58 @@ function formatDate(date) {
   return new Date(date).toLocaleDateString("en", options);
 }
 
-// Fonction pour formater la date de mise à jour de façon plus robuste
+// Fonction pour formater la date de mise à jour - TOUJOURS actuelle
 function formatLastUpdate() {
   const now = new Date();
-  // Utiliser UTC puis ajuster pour Paris (+2h en été, +1h en hiver)
-  const parisTime = new Date(now.getTime() + (2 * 60 * 60 * 1000)); // Ajustement pour UTC+2
+  console.log('Debug - Raw UTC time:', now.toISOString());
   
-  const day = parisTime.getUTCDate().toString().padStart(2, '0');
+  // Calculer l'offset pour Paris (UTC+1 en hiver, UTC+2 en été)
+  // Septembre = été donc UTC+2
+  const utcHours = now.getUTCHours();
+  const utcMinutes = now.getUTCMinutes();
+  const utcDate = now.getUTCDate();
+  const utcMonth = now.getUTCMonth();
+  const utcYear = now.getUTCFullYear();
+  
+  // Ajouter 2 heures pour Paris en septembre
+  let parisHours = utcHours + 2;
+  let parisDate = utcDate;
+  let parisMonth = utcMonth;
+  let parisYear = utcYear;
+  
+  // Gérer le passage au jour suivant
+  if (parisHours >= 24) {
+    parisHours -= 24;
+    parisDate += 1;
+    // Gérer le passage au mois suivant (simplifié)
+    if (parisDate > 30) { // approximation
+      parisDate = 1;
+      parisMonth += 1;
+      if (parisMonth > 11) {
+        parisMonth = 0;
+        parisYear += 1;
+      }
+    }
+  }
+  
+  const day = parisDate.toString().padStart(2, '0');
   const monthNames = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 
                       'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
-  const month = monthNames[parisTime.getUTCMonth()];
-  const year = parisTime.getUTCFullYear();
-  const hours = parisTime.getUTCHours().toString().padStart(2, '0');
-  const minutes = parisTime.getUTCMinutes().toString().padStart(2, '0');
+  const month = monthNames[parisMonth];
+  const year = parisYear;
+  const hours = parisHours.toString().padStart(2, '0');
+  const minutes = utcMinutes.toString().padStart(2, '0');
   
-  return `${day} ${month} ${year} ${hours}:${minutes}`;
+  const formatted = `${day} ${month} ${year} ${hours}:${minutes}`;
+  console.log('Debug - Formatted time:', formatted);
+  
+  return formatted;
 }
 
 async function generateSVG() {
   try {
+    console.log('Starting SVG generation at:', new Date().toISOString());
+    
     const userCreationDate = await fetchUserCreationDate();
     const now = new Date();
     const { allContributionDays, totalContributionsSum } = await fetchAllContributions(userCreationDate, now);
@@ -205,13 +238,18 @@ async function generateSVG() {
         ? `${formatDate(longestStreakStart)} - ${formatDate(longestStreakEnd)}`
         : "N/A";
 
-    // Correction pour currentStreakDateRange - toujours retourner quelque chose ou null
+    // CORRECTION : retourner null au lieu de chaîne vide
     const currentStreakDateRange =
       currentStreak > 0 && currentStreakStart
         ? `${formatDate(currentStreakStart)} - ${formatDate(mostRecentCommitDate)}`
-        : null; // null au lieu de chaîne vide
+        : null;
 
+    // CORRECTION : utiliser la nouvelle fonction de formatage
     const lastUpdate = formatLastUpdate();
+
+    console.log('Debug - currentStreak:', currentStreak);
+    console.log('Debug - currentStreakDateRange:', currentStreakDateRange);
+    console.log('Debug - lastUpdate:', lastUpdate);
 
     const templateData = {
       ...colors.light,
@@ -221,7 +259,7 @@ async function generateSVG() {
       totalContributions: totalContributionsSum,
       commitDateRange,
       currentStreak,
-      currentStreakDateRange, // Maintenant null quand pas de streak
+      currentStreakDateRange,
       longestStreak,
       longestStreakDateRange: longestStreakDates,
       lastUpdate,
@@ -235,8 +273,9 @@ async function generateSVG() {
       fs.mkdirSync(svgDir, { recursive: true });
     }
     const outputPath = path.join(svgDir, "stats_commits.svg");
-    fs.writeFileSync(svgContent, outputPath);
+    fs.writeFileSync(outputPath, svgContent);
     console.log(`SVG file created: ${outputPath}`);
+    console.log('SVG generation completed at:', new Date().toISOString());
   } catch (error) {
     console.error("Error generating SVG:", error);
   }
