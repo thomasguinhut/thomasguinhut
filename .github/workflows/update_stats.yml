@@ -1,24 +1,44 @@
 name: Update GitHub Stats SVG
+
 on:
   schedule:
-    - cron: '0 * * * *'  
-  workflow_dispatch:        
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
 permissions:
-  contents: write           
+  contents: write
+
 jobs:
   update-stats:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0      
+          fetch-depth: 0
+          ref: main
+
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'  
+          node-version: '18'
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: cache-npm
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm install
+
+      - name: Clean output directory
+        run: rm -rf output/*
+
       - name: Generate GitHub stats SVG
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -26,29 +46,38 @@ jobs:
           EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
           EXCLUDED_REPOS: ${{ secrets.EXCLUDED_REPOS }}
         run: |
+          mkdir -p output
+          echo "Generating stats_commits.svg..."
           node src/generators/stats_commits.js
+          echo "Generating stats_general.svg..."
           node src/generators/stats_general.js
+          echo "Generating stats_langs.svg..."
           node src/generators/stats_langs.js
-          node src/generators/stats_recents.js 
+          echo "Generating stats_recents.svg..."
+          node src/generators/stats_recents.js
+          ls -la output/
+
+      - name: Force update SVG timestamps
+        run: |
+          for file in output/*.svg; do
+            sed -i "1s/^/<!-- Updated: $(date -u +%Y-%m-%dT%H:%M:%SZ) -->\n/" "$file"
+          done
+
       - name: Setup Git identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      - name: Switch to the main branch
+
+      - name: Sync with main branch
         run: |
           git fetch origin main
           git checkout main
+          git reset --hard origin/main
           git pull origin main
-      - name: Force update stats_commits timestamp
-        run: |
-          # Ajouter un timestamp ou modifier légèrement le fichier stats_commits
-          if [ -f "output/stats_commits.svg" ]; then
-            # Ajouter un commentaire avec timestamp pour forcer un changement
-            sed -i "1s/^/<!-- Updated: $(date -u +%Y-%m-%dT%H:%M:%SZ) -->\n/" output/stats_commits.svg
-          fi
-      - name: Indexing and adding SVG
-        run: |
-          git add output/*.svg
+
+      - name: Index and add SVG files
+        run: git add output/*.svg
+
       - name: Commit and push updated SVG
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
