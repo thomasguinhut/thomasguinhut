@@ -140,6 +140,8 @@
     <text class="label streak" y="65" text-anchor="middle">Current Streak</text>
     {{#if currentStreakDateRange}}
       <text class="date streak" y="88" text-anchor="middle">{{currentStreakDateRange}}</text>
+    {{else}}
+      <text class="date streak" y="88" text-anchor="middle">No current streak</text>
     {{/if}}
     <!-- Fire icon -->
     <g transform="translate(0, -55)">
