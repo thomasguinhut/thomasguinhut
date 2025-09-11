@@ -81,10 +81,13 @@ async function fetchContributionsForPeriod(fromDate, toDate) {
   return data.user.contributionsCollection;
 }
 
-async function fetchAllContributions(userCreationDate, now) {
-  let currentStart = new Date(userCreationDate);
+async function fetchAllContributions(username, startDate, endDate) {
   let allContributionDays = [];
+  let yearlyTotals = {};
   let totalContributionsSum = 0;
+
+  let currentStart = new Date(startDate);
+  const now = new Date(endDate);
 
   while (currentStart < now) {
     const currentEnd = new Date(
@@ -97,18 +100,30 @@ async function fetchAllContributions(userCreationDate, now) {
         now.getTime()
       )
     );
+
     const contributions = await fetchContributionsForPeriod(currentStart, currentEnd);
-    totalContributionsSum = contributions.totalContributions; // Utilise le total complet
+
+    let yearSum = 0;
     contributions.contributionCalendar.weeks.forEach((week) => {
       week.contributionDays.forEach((day) => {
         allContributionDays.push(day);
+        yearSum += day.contributionCount;   // ✅ somme des carrés verts par année
       });
     });
+
+    yearlyTotals[currentStart.getFullYear()] = yearSum;
+    totalContributionsSum += yearSum;
+
     currentStart = currentEnd;
   }
 
-  return { allContributionDays, totalContributionsSum };
+  return {
+    allContributionDays,
+    totalContributionsSum,
+    yearlyTotals,
+  };
 }
+
 
 function calculateStreaksAndTotals(allContributionDays) {
   allContributionDays.sort((a, b) => new Date(a.date) - new Date(b.date));
