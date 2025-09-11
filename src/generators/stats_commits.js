@@ -168,7 +168,14 @@ function formatDate(date) {
 
 // Fonction pour formater la date de mise à jour - TOUJOURS actuelle
 function formatLastUpdate() {
-  return new Date().toISOString();
+  return new Date().toLocaleString('fr-FR', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Europe/Paris'
+  }) + " (french time)";
 }
 
 async function generateSVG() {
@@ -200,7 +207,7 @@ async function generateSVG() {
     const currentStreakDateRange =
       currentStreak > 0 && currentStreakStart
         ? `${formatDate(currentStreakStart)} - ${formatDate(mostRecentCommitDate)}`
-        : null;
+        : "N/A";
 
     // CORRECTION : utiliser la nouvelle fonction de formatage
     const lastUpdate = formatLastUpdate();
