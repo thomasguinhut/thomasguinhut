@@ -1,12 +1,8 @@
-<!-- Updated: 2025-09-06T13:17:44Z -->
-<!-- Updated: 2025-09-06T13:17:20Z -->
-<!-- Updated: 2025-09-06T13:10:01Z -->
-<!-- Updated: 2025-09-06T13:03:35Z -->
 <svg id="gh-dark-mode-only" width="460" height="210" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <mask id="hole-mask">
       <rect x="5" y="5" width="450" height="200" fill="white"/>
-      <rect x="8" y="8" width="444" height="194"  fill="black" />
+      <rect x="8" y="8" width="444" height="194" fill="black" />
     </mask>
     <mask id="ringMask">
       <rect x="-50" y="-50" width="100" height="100" fill="white" />
@@ -17,82 +13,67 @@
   <style>
     svg {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-      font-size: 12px; 
-      line-height: 18px; 
+      font-size: 12px;
+      line-height: 18px;
     }
-
     #background {
       fill: rgb(225, 228, 232, 0.1);
       stroke: rgb(225, 228, 232);
       stroke-width: 1px;
-      rx: 6px; 
-      ry: 6px; 
+      rx: 6px;
+      ry: 6px;
     }
-
     #gh-dark-mode-only:target #background {
       fill: none;
       stroke: rgb(225, 228, 232, 0.5);
     }
-
     .card-outline {
-      fill: none; 
-      stroke: rgb(225, 228, 232); 
+      fill: none;
+      stroke: rgb(225, 228, 232);
       stroke-width: 0.7px;
     }
-    
     #gh-dark-mode-only:target .card-outline {
-      fill: none; 
-      stroke: rgb(225, 228, 232, 0.5); 
+      fill: none;
+      stroke: rgb(225, 228, 232, 0.5);
       stroke-width: 0.5px;
     }
-
-    .stat { 
-      font: bold 24px sans-serif; 
-      fill: #000000; 
+    .stat {
+      font: bold 24px sans-serif;
+      fill: #000000;
     }
-    
-    #gh-dark-mode-only:target .stat { 
-      fill: #c9d1d9; 
+    #gh-dark-mode-only:target .stat {
+      fill: #c9d1d9;
     }
-    
-    .label { 
-      font: bold 13px sans-serif; 
-      fill: #000000; 
+    .label {
+      font: bold 13px sans-serif;
+      fill: #000000;
     }
-    
-    #gh-dark-mode-only:target .label { 
-      fill: #c9d1d9; 
+    #gh-dark-mode-only:target .label {
+      fill: #c9d1d9;
     }
-    
-    .date { 
-      font: bold 10px sans-serif; 
-      fill: #006AFF; 
+    .date {
+      font: bold 10px sans-serif;
+      fill: #006AFF;
     }
-    
-    #gh-dark-mode-only:target .date { 
-      fill: #006AFF; 
+    #gh-dark-mode-only:target .date {
+      fill: #006AFF;
     }
-    
-    .divider { 
-      stroke: #006AFF; 
-      stroke-width: 1; 
+    .divider {
+      stroke: #006AFF;
+      stroke-width: 1;
     }
-    
-    #gh-dark-mode-only:target .divider { 
-      stroke: #006AFF; 
+    #gh-dark-mode-only:target .divider {
+      stroke: #006AFF;
     }
-    
-    .footer { 
-      font: 9px sans-serif; 
-      font-weight: 200; 
-      letter-spacing: 0.3px; 
-      fill: #000000; 
+    .footer {
+      font: 9px sans-serif;
+      font-weight: 200;
+      letter-spacing: 0.3px;
+      fill: #000000;
     }
-    
-    #gh-dark-mode-only:target .footer { 
-      fill: #c9d1d9; 
+    #gh-dark-mode-only:target .footer {
+      fill: #c9d1d9;
     }
-    
     .ring {
       stroke-width: 7;
       fill: none;
@@ -102,21 +83,17 @@
       opacity: 0;
       animation: ring-draw 0.5s cubic-bezier(.6,.1,.4,1.2) forwards 0.2s;
     }
-    
-    #gh-dark-mode-only:target .ring { 
-      stroke: #006AFF; 
+    #gh-dark-mode-only:target .ring {
+      stroke: #006AFF;
     }
-    
-    .fire { 
-      fill: #006AFF; 
-      opacity: 0; 
-      animation: fadein 0.4s linear forwards 0.5s; 
-    } 
-    
-    #gh-dark-mode-only:target .fire { 
-      fill: #006AFF; 
+    .fire {
+      fill: #006AFF;
+      opacity: 0;
+      animation: fadein 0.4s linear forwards 0.5s;
     }
-    
+    #gh-dark-mode-only:target .fire {
+      fill: #006AFF;
+    }
     .card-outline { animation: fadein 0.7s linear forwards 0.4s; opacity: 0; }
     .stat.tc { animation: fadein 0.7s linear forwards 1.7s; opacity: 0; }
     .label.tc { animation: wipeRight 1.1s cubic-bezier(.45,1.5,.45,1) forwards 1.7s; opacity: 0;}
@@ -132,7 +109,6 @@
     @keyframes currstreak { 0% { font-size: 3px; opacity: 0.2; } 80% { font-size: 24px; opacity: 1; } 100% { font-size: 20px; opacity: 1; } }
     @keyframes ring-draw { 0% { stroke-dashoffset: 240; opacity: 0.2; } 70% { opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 1; } }
     @keyframes wipeRight { 0% { opacity: 0; clip-path: inset(0 100% 0 0); } 20% { opacity: 1; } 100% { opacity: 1; clip-path: inset(0 0 0 0);} }
-
     @supports (-webkit-touch-callout: none) {
       .card-outline, .stat, .label, .date, .footer, .ring, .fire {
         animation: none !important;
@@ -143,22 +119,18 @@
       }
     }
   </style>
-
   <!-- Background -->
-  <rect x="5" y="5" id="background"  width="450" height="200" mask="url(#hole-mask)"/>
+  <rect x="5" y="5" id="background" width="450" height="200" mask="url(#hole-mask)"/>
   <rect class="card-outline" x="8" y="8" width="444" height="194" />
-
   <!-- Divider Lines -->
   <line x1="156" y1="40" x2="156" y2="171" class="divider" />
   <line x1="304" y1="40" x2="304" y2="171" class="divider" />
-
   <!-- Section 1: Total Contributions -->
   <g transform="translate(83, 80)">
-    <text class="stat tc" y="15" text-anchor="middle">754</text>
+    <text class="stat tc" y="15" text-anchor="middle">0</text>
     <text class="label tc" y="50" text-anchor="middle">Total Contributions</text>
-    <text class="date tc" y="73" text-anchor="middle">Nov 22, 2023 - Sep 4, 2025</text>
+    <text class="date tc" y="73" text-anchor="middle">Nov 22, 2023 - Sep 11, 2025</text>
   </g>
-
   <!-- Section 2: Current Streak -->
   <g style="isolation: isolate" transform="translate(230, 80)">
     <g mask="url(#ringMask)">
@@ -166,7 +138,7 @@
     </g>
     <text class="stat streak" y="6" text-anchor="middle">0</text>
     <text class="label streak" y="65" text-anchor="middle">Current Streak</text>
-    <text class="date streak" y="88" text-anchor="middle">N/A</text>
+      <text class="date streak" y="88" text-anchor="middle">N/A</text>
     <!-- Fire icon -->
     <g transform="translate(0, -55)">
       <path d="M -12 -0.5 L 15 -0.5 L 15 23.5 L -12 23.5 L -12 -0.5 Z" fill="none"/>
@@ -182,16 +154,15 @@
         C 4.51 16.85 2.36 19 -0.29 19 Z"/>
     </g>
   </g>
-
   <!-- Section 3: Longest Streak -->
   <g transform="translate(377.5, 80)">
-    <text class="stat long" y="15" text-anchor="middle">10</text>
+    <text class="stat long" y="15" text-anchor="middle">0</text>
     <text class="label long" y="50" text-anchor="middle">Longest Streak</text>
-    <text class="date long" y="73" text-anchor="middle">Apr 29, 2024 - May 8, 2024</text>
+    <text class="date long" y="73" text-anchor="middle">N/A</text>
   </g>
-
   <!-- Footer -->
   <g transform="translate(230, 188)">
-    <text class="footer" text-anchor="middle">Updated last at: 04 sept. 2025 10:19 (french time)</text>
+    <text class="footer" text-anchor="middle">Updated last at: 12 sept. 2025, 00:17 (french time) (french time)</text>
   </g>
 </svg>
+<!-- Updated: 2025-09-11T22:17:24Z -->
