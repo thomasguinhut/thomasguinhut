@@ -1,5 +1,4 @@
 name: Update GitHub Stats SVG
-
 on:
   schedule:
     - cron: '0 * * * *'  # Exécute toutes les heures
@@ -11,7 +10,6 @@ permissions:
 jobs:
   update-stats:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -61,36 +59,20 @@ jobs:
       - name: Force update SVG timestamps
         run: |
           for file in output/*.svg; do
-            sed -i "1s/^/<!-- Updated: $(date -u +%Y-%m-%dT%H:%M:%SZ) -->\n/" "$file"
+            echo "<!-- Updated: $(date -u +%Y-%m-%dT%H:%M:%SZ) -->" >> "$file"
           done
+          echo "Timestamps updated in SVG files"
+          head -n 5 output/stats_commits.svg
 
       - name: Setup Git identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Sync with main branch
-        run: |
-          git fetch origin main
-          git checkout main
-          git reset --hard origin/main
-          git pull origin main
-
-      - name: Index and add SVG files
-        run: git add output/*.svg
-
       - name: Commit and push updated SVG
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            git commit -m "chore: update GitHub stats SVG (manual run)" --allow-empty
-            git push origin main
-          else
-            if git diff --cached --quiet; then
-              echo "No changes found, commit skipped."
-            else
-              git commit -m "chore: update GitHub stats SVG"
-              git push origin main
-            fi
-          fi
+          git add output/*.svg
+          git commit -m "chore: update GitHub stats SVG [ci skip]" || echo "No changes to commit"
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
