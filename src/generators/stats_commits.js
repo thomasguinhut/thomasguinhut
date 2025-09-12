@@ -82,13 +82,8 @@ async function fetchContributionsForPeriod(fromDate, toDate) {
   const query = `
     query ($username: String!, $from: DateTime!, $to: DateTime!) {
       user(login: $username) {
-        contributionsCollection(from: $from, to: $to) {
+        contributionsCollection(from: $from, to: $to, includePrivateContributions: true) {
           totalCommitContributions
-          totalIssueContributions
-          totalPullRequestContributions
-          totalPullRequestReviewContributions
-          totalRepositoryContributions
-          totalContributions
           contributionCalendar {
             totalContributions
             weeks {
