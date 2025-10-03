@@ -129,7 +129,7 @@
   <g transform="translate(83, 80)">
     <text class="stat tc" y="15" text-anchor="middle">0</text>
     <text class="label tc" y="50" text-anchor="middle">Total Contributions</text>
-    <text class="date tc" y="73" text-anchor="middle">Nov 22, 2023 - Oct 2, 2025</text>
+    <text class="date tc" y="73" text-anchor="middle">Nov 22, 2023 - Oct 3, 2025</text>
   </g>
   <!-- Section 2: Current Streak -->
   <g style="isolation: isolate" transform="translate(230, 80)">
@@ -162,7 +162,7 @@
   </g>
   <!-- Footer -->
   <g transform="translate(230, 188)">
-    <text class="footer" text-anchor="middle">Updated last at: 03 oct. 2025, 01:13 (french time) (french time)</text>
+    <text class="footer" text-anchor="middle">Updated last at: 03 oct. 2025, 03:07 (french time) (french time)</text>
   </g>
 </svg>
-<!-- Updated: 2025-10-02T23:14:01Z -->
+<!-- Updated: 2025-10-03T01:08:00Z -->
