@@ -211,7 +211,7 @@
           <tr class="repo-row" style="height: 50px; animation-delay: 1.4s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center;">
-              <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_methodo_3a</span>
+              <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_reducdim_3a</span>
             </div>
           </td>
           <td class="unique-count" style="width: 130px; text-align: center;">3</td>
@@ -220,14 +220,14 @@
           <tr class="repo-row" style="height: 50px; animation-delay: 2.9s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center;">
-              <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_reducdim_3a</span>
+              <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_methodo_3a</span>
             </div>
           </td>
-          <td class="unique-count" style="width: 130px; text-align: center;">3</td>
-          <td class="date-range" style="width: 120px; text-align: center;">02.02 - 15.02</td>
+          <td class="unique-count" style="width: 130px; text-align: center;">2</td>
+          <td class="date-range" style="width: 120px; text-align: center;">03.02 - 16.02</td>
         </tr>
         </tbody>
       </table>
     </foreignObject>
   </g>
-</svg><!-- Updated: 2026-02-17T04:10:30Z -->
+</svg><!-- Updated: 2026-02-17T05:53:22Z -->
