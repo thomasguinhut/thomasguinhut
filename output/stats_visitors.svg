@@ -208,16 +208,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="repo-row" style="height: 50px; animation-delay: 1.4s;">
+          <tr class="repo-row" style="height: 33.333333333333336px; animation-delay: 1.4s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center;">
               <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_methodo_3a</span>
             </div>
           </td>
           <td class="unique-count" style="width: 130px; text-align: center;">2</td>
-          <td class="date-range" style="width: 120px; text-align: center;">10.02 - 23.02</td>
+          <td class="date-range" style="width: 120px; text-align: center;">11.02 - 24.02</td>
         </tr>
-          <tr class="repo-row" style="height: 50px; animation-delay: 2.9s;">
+          <tr class="repo-row" style="height: 33.333333333333336px; animation-delay: 2.15s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center;">
               <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_reducdim_3a</span>
@@ -226,8 +226,17 @@
           <td class="unique-count" style="width: 130px; text-align: center;">2</td>
           <td class="date-range" style="width: 120px; text-align: center;">10.02 - 23.02</td>
         </tr>
+          <tr class="repo-row" style="height: 33.333333333333336px; animation-delay: 2.9s;">
+          <td class="repo-name" style="width: 186px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">stage_2a_enl</span>
+            </div>
+          </td>
+          <td class="unique-count" style="width: 130px; text-align: center;">1</td>
+          <td class="date-range" style="width: 120px; text-align: center;">10.02 - 23.02</td>
+        </tr>
         </tbody>
       </table>
     </foreignObject>
   </g>
-</svg><!-- Updated: 2026-02-25T01:16:48Z -->
+</svg><!-- Updated: 2026-02-25T04:11:18Z -->
