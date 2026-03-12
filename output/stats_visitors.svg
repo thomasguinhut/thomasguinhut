@@ -215,7 +215,7 @@
             </div>
           </td>
           <td class="unique-count" style="width: 130px; text-align: center;">3</td>
-          <td class="date-range" style="width: 120px; text-align: center;">24.02 - 09.03</td>
+          <td class="date-range" style="width: 120px; text-align: center;">25.02 - 10.03</td>
         </tr>
           <tr class="repo-row" style="height: 20px; animation-delay: 1.775s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
@@ -224,7 +224,7 @@
             </div>
           </td>
           <td class="unique-count" style="width: 130px; text-align: center;">3</td>
-          <td class="date-range" style="width: 120px; text-align: center;">24.02 - 09.03</td>
+          <td class="date-range" style="width: 120px; text-align: center;">25.02 - 10.03</td>
         </tr>
           <tr class="repo-row" style="height: 20px; animation-delay: 2.15s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
@@ -233,7 +233,7 @@
             </div>
           </td>
           <td class="unique-count" style="width: 130px; text-align: center;">2</td>
-          <td class="date-range" style="width: 120px; text-align: center;">24.02 - 09.03</td>
+          <td class="date-range" style="width: 120px; text-align: center;">25.02 - 10.03</td>
         </tr>
           <tr class="repo-row" style="height: 20px; animation-delay: 2.525s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
@@ -257,4 +257,4 @@
       </table>
     </foreignObject>
   </g>
-</svg><!-- Updated: 2026-03-11T23:16:58Z -->
+</svg><!-- Updated: 2026-03-12T01:05:54Z -->
