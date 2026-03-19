@@ -1,12 +1,10 @@
 name: Update GitHub Stats SVG
 on:
   schedule:
-    - cron: '0 * * * *' # Exécute toutes les heures
-  workflow_dispatch: # Permet de déclencher manuellement
-
+    - cron: '0 * * * *'
+  workflow_dispatch:
 permissions:
-  contents: write # Permission pour écrire dans le dépôt
-
+  contents: write
 jobs:
   update-stats:
     runs-on: ubuntu-latest
@@ -37,7 +35,7 @@ jobs:
       - name: Clean output directory
         run: rm -rf output/*
 
-      - name: Generate GitHub stats SVG
+      - name: Generate GitHub stats SVGs
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,33 +44,22 @@ jobs:
           GITHUB_USERNAME: "thomasguinhut"
         run: |
           mkdir -p output
-          echo "Generating stats_commits.svg..."
           node src/generators/stats_commits.js
-          echo "Generating stats_general.svg..."
           node src/generators/stats_general.js
-          echo "Generating stats_langs.svg..."
           node src/generators/stats_langs.js
-          echo "Generating stats_visitors.svg..."
           node src/generators/stats_visitors.js
           ls -la output/
-
-      - name: Force update SVG timestamps
-        run: |
-          for file in output/*.svg; do
-            echo "<!-- Updated: $(date -u +%Y-%m-%dT%H:%M:%SZ) -->" >> "$file"
-          done
-          echo "Timestamps updated in SVG files"
-          head -n 5 output/stats_commits.svg
 
       - name: Setup Git identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit and push updated SVG
-        run: |
-          git add output/*.svg
-          git commit -m "chore: update GitHub stats SVG [ci skip]" || echo "No changes to commit"
-          git push origin main
+      - name: Commit and push updated SVGs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add output/*.svg
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "chore: update GitHub stats SVG [ci skip]"
+          git push origin main

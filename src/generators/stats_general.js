@@ -3,15 +3,18 @@ import path from "path";
 import Handlebars from "handlebars";
 import colors from "../../themes/colors_general.js";
 
-const username = process.env.GITHUB_ACTOR;
+const username = process.env.GITHUB_USERNAME;
 const token = process.env.ACCESS_TOKEN;
-
 const excludedRepos = process.env.EXCLUDED_REPOS
   ? process.env.EXCLUDED_REPOS.split(",").map((r) => r.trim().toLowerCase())
   : [];
 
 if (!token) {
   console.error("Error: ACCESS_TOKEN is not defined in environment variables.");
+  process.exit(1);
+}
+if (!username) {
+  console.error("Error: GITHUB_USERNAME is not defined in environment variables.");
   process.exit(1);
 }
 
@@ -25,22 +28,22 @@ class GitHubQueries {
 
   async queryRest(endpoint) {
     let response;
+    let attempts = 0;
     do {
+      if (attempts > 10) throw new Error("Too many 202 retries from GitHub API");
       response = await fetch(`${REST_API}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${this.token}`,
           "Content-Type": "application/json",
         },
       });
-
       if (response.status === 202) {
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        attempts++;
       } else if (!response.ok) {
-        await response.text();
-        throw new Error("Не удалось получить данные из GitHub REST API.");
+        throw new Error(`Failed to get data from GitHub REST API: ${response.status}`);
       }
     } while (response.status === 202);
-
     return response.json();
   }
 }
@@ -55,74 +58,40 @@ class UserStats {
   }
 
   async linesChanged() {
-    if (this._linesChanged !== null) {
-      return this._linesChanged;
-    }
-
-    let additions = 0;
-    let deletions = 0;
-
+    if (this._linesChanged !== null) return this._linesChanged;
+    let additions = 0, deletions = 0;
     for (const repo of await this.repos) {
       try {
-        const r = await this.queries.queryRest(
-          `/repos/${repo}/stats/contributors`
-        );
-
-        if (!Array.isArray(r)) {
-          continue;
-        }
-
+        const r = await this.queries.queryRest(`/repos/${repo}/stats/contributors`);
+        if (!Array.isArray(r)) continue;
         for (const authorObj of r) {
-          if (
-            typeof authorObj !== "object" ||
-            !authorObj.author ||
-            typeof authorObj.author !== "object"
-          ) {
-            continue;
-          }
-
-          const author = authorObj.author.login || "";
-          if (author !== this.username) {
-            continue;
-          }
-
+          if (!authorObj?.author?.login) continue;
+          if (authorObj.author.login !== this.username) continue;
           for (const week of authorObj.weeks || []) {
             additions += week.a || 0;
             deletions += week.d || 0;
           }
         }
       } catch (error) {
-        // ignore errors for individual repos
+        // ignore individual repo errors
       }
     }
-
     this._linesChanged = additions + deletions;
     return this._linesChanged;
   }
 
   async views() {
-    if (this._views !== null) {
-      return this._views;
-    }
-
+    if (this._views !== null) return this._views;
     let total = 0;
-
     for (const repo of await this.repos) {
       try {
         const r = await this.queries.queryRest(`/repos/${repo}/traffic/views`);
-
-        if (!r.views || !Array.isArray(r.views)) {
-          continue;
-        }
-
-        for (const view of r.views) {
-          total += view.count || 0;
-        }
+        if (!Array.isArray(r.views)) continue;
+        for (const view of r.views) total += view.count || 0;
       } catch (error) {
-        // ignore errors for individual repos
+        // ignore individual repo errors
       }
     }
-
     this._views = total;
     return total;
   }
@@ -137,16 +106,9 @@ async function fetchFromGitHub(query, variables = {}) {
     },
     body: JSON.stringify({ query, variables }),
   });
-
-  if (!response.ok) {
-    await response.text();
-    throw new Error("Failed to get data from GitHub API.");
-  }
-
+  if (!response.ok) throw new Error(`GitHub API returned status ${response.status}`);
   const data = await response.json();
-  if (data.errors) {
-    throw new Error("Failed to get data from GitHub API.");
-  }
+  if (data.errors) throw new Error("GraphQL errors: " + JSON.stringify(data.errors));
   return data.data;
 }
 
@@ -160,9 +122,7 @@ async function main() {
             totalCount
             nodes {
               nameWithOwner
-              stargazers {
-                totalCount
-              }
+              stargazers { totalCount }
               forkCount
             }
           }
@@ -190,51 +150,32 @@ async function main() {
 
     const stats = {
       name: user.name || username,
-      stars: filteredRepoNodes.reduce(
-        (sum, repo) => sum + repo.stargazers.totalCount,
-        0
-      ),
+      stars: filteredRepoNodes.reduce((sum, repo) => sum + repo.stargazers.totalCount, 0),
       forks: filteredRepoNodes.reduce((sum, repo) => sum + repo.forkCount, 0),
       contributions: user.contributionsCollection.totalCommitContributions,
       linesChanged: totalLinesChanged,
-      views: views,
+      views,
       repos: filteredRepoNodes.length,
     };
 
-    const dataForTemplate = {
+    const templateData = {
       ...colors.light,
-      ...Object.fromEntries(
-        Object.entries(colors.dark).map(([k, v]) => [k + "Dark", v])
-      ),
+      ...Object.fromEntries(Object.entries(colors.dark).map(([k, v]) => [k + "Dark", v])),
       ...stats,
     };
 
-    const templatePath = path.resolve(
-      path.dirname(new URL(import.meta.url).pathname),
-      "..",
-      "templates",
-      "template_general.hbs"
-    );
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+    const templatePath = path.resolve(__dirname, "..", "templates", "template_general.hbs");
+    const svgContent = Handlebars.compile(fs.readFileSync(templatePath, "utf8"))(templateData);
 
-    const svgContent = Handlebars.compile(
-      fs.readFileSync(templatePath, "utf8")
-    )(dataForTemplate);
+    const svgDir = path.resolve(__dirname, "..", "..", "output");
+    if (!fs.existsSync(svgDir)) fs.mkdirSync(svgDir, { recursive: true });
 
-    const svgDir = path.resolve(
-      path.dirname(new URL(import.meta.url).pathname),
-      "..",
-      "..",
-      "output"
-    );
-    if (!fs.existsSync(svgDir)) {
-      fs.mkdirSync(svgDir, { recursive: true });
-    }
-
-    const outputPath = path.join(svgDir, "stats_general.svg");
-    fs.writeFileSync(outputPath, svgContent);
-    console.log(`SVG file created: ${outputPath}`);
+    fs.writeFileSync(path.join(svgDir, "stats_general.svg"), svgContent);
+    console.log('✅ stats_general.svg created');
   } catch (error) {
-    console.error("Error generating SVG:", error);
+    console.error("❌ Error generating SVG:", error);
+    process.exit(1);
   }
 }
 
