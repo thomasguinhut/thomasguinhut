@@ -207,46 +207,46 @@
           <tr class="repo-row" style="height: 20px; animation-delay: 1.4s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
-                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">stage_anthony</span>
+                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_analyse_spatiale_3a</span>
               </div>
             </td>
-            <td class="updated-at" style="width: 130px; text-align: center;">Sep 2, 2025</td>
+            <td class="updated-at" style="width: 130px; text-align: center;">Mar 6, 2026</td>
             <td class="language" style="width: 120px; text-align: center;">R</td>
           </tr>
           <tr class="repo-row" style="height: 20px; animation-delay: 1.775s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
-                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">stage_2a_enl</span>
+                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_reducdim_3a</span>
               </div>
             </td>
-            <td class="updated-at" style="width: 130px; text-align: center;">Sep 1, 2025</td>
-            <td class="language" style="width: 120px; text-align: center;">R</td>
+            <td class="updated-at" style="width: 130px; text-align: center;">Mar 2, 2026</td>
+            <td class="language" style="width: 120px; text-align: center;">HTML</td>
           </tr>
           <tr class="repo-row" style="height: 20px; animation-delay: 2.15s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
-                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">edt_ensai</span>
+                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_methodo_3a</span>
               </div>
             </td>
-            <td class="updated-at" style="width: 130px; text-align: center;">Aug 30, 2025</td>
-            <td class="language" style="width: 120px; text-align: center;">Python</td>
+            <td class="updated-at" style="width: 130px; text-align: center;">Mar 1, 2026</td>
+            <td class="language" style="width: 120px; text-align: center;">R</td>
           </tr>
           <tr class="repo-row" style="height: 20px; animation-delay: 2.525s;">
+            <td class="repo-name" style="width: 186px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center;">
+                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_eval_impact_3a</span>
+              </div>
+            </td>
+            <td class="updated-at" style="width: 130px; text-align: center;">Feb 9, 2026</td>
+            <td class="language" style="width: 120px; text-align: center;">R</td>
+          </tr>
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.9s;">
             <td class="repo-name" style="width: 186px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">carnet_partitions</span>
               </div>
             </td>
-            <td class="updated-at" style="width: 130px; text-align: center;">Aug 29, 2025</td>
-            <td class="language" style="width: 120px; text-align: center;">Python</td>
-          </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.9s;">
-            <td class="repo-name" style="width: 186px; text-align: center;">
-              <div style="display: flex; align-items: center; justify-content: center;">
-                <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">statagora</span>
-              </div>
-            </td>
-            <td class="updated-at" style="width: 130px; text-align: center;">Aug 4, 2025</td>
+            <td class="updated-at" style="width: 130px; text-align: center;">Oct 26, 2025</td>
             <td class="language" style="width: 120px; text-align: center;">Python</td>
           </tr>
         </tbody>
