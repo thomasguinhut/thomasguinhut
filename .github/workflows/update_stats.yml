@@ -10,18 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: main
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: cache-npm
         with:
           path: node_modules
@@ -47,6 +47,7 @@ jobs:
           node src/generators/stats_commits.js
           node src/generators/stats_general.js
           node src/generators/stats_langs.js
+          node src/generators/stats_recents.js
           node src/generators/stats_visitors.js
           ls -la output/
 
