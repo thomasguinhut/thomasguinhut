@@ -202,13 +202,22 @@
           <tr class="repo-row" style="height: 20px; animation-delay: 1.4s;">
             <td class="repo-name" style="width: 242px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
+                <span style="margin-left: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">encyclostats</span>
+              </div>
+            </td>
+            <td class="updated-at" style="width: 95px; text-align: center;">May 18, 2026</td>
+            <td class="language" style="width: 103px; text-align: center;">Python</td>
+          </tr>
+          <tr class="repo-row" style="height: 20px; animation-delay: 1.775s;">
+            <td class="repo-name" style="width: 242px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">france_carburants</span>
               </div>
             </td>
             <td class="updated-at" style="width: 95px; text-align: center;">May 7, 2026</td>
             <td class="language" style="width: 103px; text-align: center;">Python</td>
           </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 1.775s;">
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.15s;">
             <td class="repo-name" style="width: 242px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_analyse_spatiale_3a</span>
@@ -217,7 +226,7 @@
             <td class="updated-at" style="width: 95px; text-align: center;">Apr 4, 2026</td>
             <td class="language" style="width: 103px; text-align: center;">R</td>
           </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.15s;">
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.525s;">
             <td class="repo-name" style="width: 242px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_reducdim_3a</span>
@@ -226,22 +235,13 @@
             <td class="updated-at" style="width: 95px; text-align: center;">Mar 2, 2026</td>
             <td class="language" style="width: 103px; text-align: center;">HTML</td>
           </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.525s;">
+          <tr class="repo-row" style="height: 20px; animation-delay: 2.9s;">
             <td class="repo-name" style="width: 242px; text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center;">
                 <span style="margin-left: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_methodo_3a</span>
               </div>
             </td>
             <td class="updated-at" style="width: 95px; text-align: center;">Mar 1, 2026</td>
-            <td class="language" style="width: 103px; text-align: center;">R</td>
-          </tr>
-          <tr class="repo-row" style="height: 20px; animation-delay: 2.9s;">
-            <td class="repo-name" style="width: 242px; text-align: center;">
-              <div style="display: flex; align-items: center; justify-content: center;">
-                <span style="margin-left: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ensai_projet_eval_impact_3a</span>
-              </div>
-            </td>
-            <td class="updated-at" style="width: 95px; text-align: center;">Feb 9, 2026</td>
             <td class="language" style="width: 103px; text-align: center;">R</td>
           </tr>
         </tbody>
