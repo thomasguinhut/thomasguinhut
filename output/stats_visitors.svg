@@ -208,23 +208,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="repo-row" style="height: 50px; animation-delay: 1.4s;">
+          <tr class="repo-row" style="height: 100px; animation-delay: 2.9s;">
           <td class="repo-name" style="width: 186px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center;">
               <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">carnet_partitions</span>
             </div>
           </td>
-          <td class="unique-count" style="width: 130px; text-align: center;">3</td>
-          <td class="date-range" style="width: 120px; text-align: center;">29.10 - 11.11</td>
-        </tr>
-          <tr class="repo-row" style="height: 50px; animation-delay: 2.9s;">
-          <td class="repo-name" style="width: 186px; text-align: center;">
-            <div style="display: flex; align-items: center; justify-content: center;">
-              <span style="margin-left: 10px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">edt_ensai</span>
-            </div>
-          </td>
           <td class="unique-count" style="width: 130px; text-align: center;">2</td>
-          <td class="date-range" style="width: 120px; text-align: center;">29.10 - 11.11</td>
+          <td class="date-range" style="width: 120px; text-align: center;">30.10 - 12.11</td>
         </tr>
         </tbody>
       </table>
